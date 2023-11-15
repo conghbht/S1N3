@@ -33,6 +33,7 @@ public class SanPham {
     private double giaBan;
     private String ngayTao;
     private String trangThai;
+    private int maimei;
 
     public SanPham() {
     }
@@ -208,6 +209,16 @@ public class SanPham {
     public void setMaHDH(int maHDH) {
         this.maHDH = maHDH;
     }
+
+    public int getMaimei() {
+        return maimei;
+    }
+
+    public void setMaimei(int maimei) {
+        this.maimei = maimei;
+    }
+    
+    
 
     @Override
     public String toString() {

@@ -18,7 +18,7 @@ public class DBContext {
     public final static String USERNAME = "sa";
     public final static String PASSWORD = "2566526";
     public final static String URL = "jdbc:sqlserver://localhost:1433;"
-            + "databaseName=DuAnXuong1;encrypt=false;";
+            + "databaseName=DuAnXuong;encrypt=false;";
 
     static {
         try {
