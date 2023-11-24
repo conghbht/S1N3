@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import models.ManHinh;
+import models.Ram;
 import models.XuatXu;
 import utils.DBContext;
 
@@ -26,10 +27,30 @@ public class XuatXuService {
                 XuatXu x = new XuatXu();
                 x.setMa(rs.getInt(1));
                 x.setTen(rs.getString(2));
-                
+                x.setTrangThai(rs.getInt(3)==1?true:false);
                 list.add(x);
             }
             return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public XuatXu searchByID(int id) {
+        String sql = "select * from XuatXu where ma = ?";
+        try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
+            pstm.setInt(1, id);
+            ResultSet rs = pstm.executeQuery();
+            ArrayList<XuatXu> list = new ArrayList<>();
+            while (rs.next()) {
+                XuatXu x = new XuatXu();
+                x.setMa(rs.getInt(1));
+                x.setTen(rs.getString(2));
+                x.setTrangThai(rs.getInt(3) == 1 ? true : false);
+                list.add(x);
+            }
+            return list.get(0);
         } catch (Exception e) {
             e.printStackTrace();
         }

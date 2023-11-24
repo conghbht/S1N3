@@ -12,6 +12,7 @@ public class Camera {
     private int ma;
     private String ten;
     private String dungLuong;
+    private boolean trangThai;
 
     public Camera() {
     }
@@ -50,5 +51,14 @@ public class Camera {
     public String toString() {
         return ten + " - " + dungLuong;
     }
+
+    public boolean isTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
+    }
+    
     
 }

@@ -12,6 +12,7 @@ public class Ram {
     private int ma;
     private String ten;
     private String dungLuong;
+    private boolean trangThai;
 
     public Ram() {
     }
@@ -49,6 +50,14 @@ public class Ram {
     @Override
     public String toString() {
         return ten + " - " + dungLuong;
+    }
+
+    public boolean isTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
     }
     
     

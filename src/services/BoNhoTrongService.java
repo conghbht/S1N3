@@ -17,6 +17,7 @@ import utils.DBContext;
  * @author dovan
  */
 public class BoNhoTrongService {
+
     public ArrayList<BoNhoTrong> getAll() {
         String sql = "select * from BoNhoTrong";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
@@ -27,6 +28,7 @@ public class BoNhoTrongService {
                 x.setMa(rs.getInt(1));
                 x.setLoai(rs.getString(2));
                 x.setDungLuong(rs.getString(3));
+                x.setTrangThai(rs.getInt(4) == 1 ? true : false);
                 list.add(x);
             }
             return list;
@@ -35,7 +37,7 @@ public class BoNhoTrongService {
         }
         return null;
     }
-    
+
     public BoNhoTrong searchByID(int id) {
         String sql = "select * from BoNhoTrong where ma = ?";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
@@ -47,6 +49,7 @@ public class BoNhoTrongService {
                 x.setMa(rs.getInt(1));
                 x.setLoai(rs.getString(2));
                 x.setDungLuong(rs.getString(3));
+                x.setTrangThai(rs.getInt(4) == 1 ? true : false);
                 list.add(x);
             }
             return list.get(0);

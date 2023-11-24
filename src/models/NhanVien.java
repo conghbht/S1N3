@@ -22,12 +22,13 @@ public class NhanVien {
     private String diaChi;
     private String email;
     private boolean vaiTro;
-    private String trangThai;
+    private boolean trangThai;
 
     public NhanVien() {
     }
 
-    public NhanVien(String maNhanVien, String matKhau, String tenNhanVien, String anhNhanVien, String soDienThoai, String ngaySinh, String ngayTao, boolean gioiTinh, String diaChi, String email, boolean vaiTro, String trangThai) {
+    public NhanVien(String maNhanVien, String matKhau, String tenNhanVien, String anhNhanVien, String soDienThoai,
+    String ngaySinh, String ngayTao, boolean gioiTinh, String diaChi, String email, boolean vaiTro, boolean trangThai) {
         this.maNhanVien = maNhanVien;
         this.matKhau = matKhau;
         this.tenNhanVien = tenNhanVien;
@@ -130,15 +131,11 @@ public class NhanVien {
         this.vaiTro = vaiTro;
     }
 
-    public String getTrangThai() {
+    public boolean getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(String trangThai) {
+    public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
-    }
-
-    
-    
-    
+    }    
 }

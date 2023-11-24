@@ -11,6 +11,7 @@ package models;
 public class Hang {
     private int ma;
     private String ten;
+    private boolean trangThai;
 
     public Hang() {
     }
@@ -39,6 +40,14 @@ public class Hang {
     @Override
     public String toString() {
         return ten;
+    }
+
+    public boolean isTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
     }
     
     

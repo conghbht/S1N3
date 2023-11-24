@@ -18,7 +18,7 @@ import utils.DBContext;
 public class ManHinhService {
     Connection con = DBContext.getConnection();
     
-    public ArrayList<ManHinh> getAll() {
+    public ArrayList<ManHinh> paging() {
         String sql = "select * from ManHinh";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
             ResultSet rs = pstm.executeQuery();
@@ -27,29 +27,7 @@ public class ManHinhService {
                 ManHinh x = new ManHinh();
                 x.setMaManHinh(rs.getInt(1));
                 x.setTenManHinh(rs.getString(2));
-                x.setTrangThai(rs.getString(3));
-                list.add(x);
-            }
-            return list;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    
-    public ArrayList<ManHinh> paging(int page,int limit) {
-        String sql = "select * from ManHinh order by maManHinh "
-                + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
-        try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
-            pstm.setInt(1, (page - 1) * limit);
-            pstm.setInt(2, limit);
-            ResultSet rs = pstm.executeQuery();
-            ArrayList<ManHinh> list = new ArrayList<>();
-            while (rs.next()) {
-                ManHinh x = new ManHinh();
-                x.setMaManHinh(rs.getInt(1));
-                x.setTenManHinh(rs.getString("tenManHinh"));
-                x.setTrangThai(rs.getString("trangThai"));
+                x.setTrangThai(rs.getInt(3)==1?true:false);
                 list.add(x);
             }
             return list;
@@ -64,7 +42,7 @@ public class ManHinhService {
                 + " values(?,?)";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
             pstm.setString(1, x.getTenManHinh());
-            pstm.setString(2, x.getTrangThai());
+            pstm.setInt(2, x.getTrangThai()?1:0);
             int rs = pstm.executeUpdate();
             return rs;
         } catch (Exception e) {
@@ -78,7 +56,7 @@ public class ManHinhService {
                 + "trangThai=? where maManHinh=?";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
             pstm.setString(1, x.getTenManHinh());
-            pstm.setString(2, x.getTrangThai());
+            pstm.setInt(2, x.getTrangThai()?1:0);
             pstm.setInt(3, key);
             int rs = pstm.executeUpdate();
             return rs;
@@ -113,7 +91,7 @@ public class ManHinhService {
                 ManHinh x = new ManHinh();
                 x.setMaManHinh(rs.getInt(1));
                 x.setTenManHinh(rs.getString("ten"));
-                x.setTrangThai(rs.getString("trangThai"));
+                x.setTrangThai(rs.getInt("trangThai")==1?true:false);
                 list.add(x);
             }
             return list;
@@ -134,7 +112,7 @@ public class ManHinhService {
                 ManHinh x = new ManHinh();
                 x.setMaManHinh(rs.getInt(1));
                 x.setTenManHinh(rs.getString("ten"));
-                x.setTrangThai(rs.getString("trangThai"));
+                x.setTrangThai(rs.getInt("trangThai")==1?true:false);
                 list.add(x);
             }
             return list.get(0);

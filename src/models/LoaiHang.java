@@ -11,6 +11,8 @@ package models;
 public class LoaiHang {
     private int ma;
     private String ten;
+    private boolean trangThai;
+
 
     public LoaiHang() {
     }
@@ -39,6 +41,14 @@ public class LoaiHang {
     @Override
     public String toString() {
         return ten;
+    }
+
+    public boolean isTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
     }
     
     

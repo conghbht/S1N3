@@ -11,12 +11,12 @@ package models;
 public class ManHinh {
     private int maManHinh;
     private String tenManHinh;
-    private String trangThai;
+    private boolean trangThai;
 
     public ManHinh() {
     }
 
-    public ManHinh(int maManHinh, String tenManHinh, String trangThai) {
+    public ManHinh(int maManHinh, String tenManHinh, boolean trangThai) {
         this.maManHinh = maManHinh;
         this.tenManHinh = tenManHinh;
         this.trangThai = trangThai;
@@ -38,11 +38,11 @@ public class ManHinh {
         this.tenManHinh = tenManHinh;
     }
 
-    public String getTrangThai() {
+    public boolean getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(String trangThai) {
+    public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
     }
 

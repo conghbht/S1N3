@@ -21,17 +21,19 @@ import utils.XDate;
  */
 public class KhachHangService {
 
-    public ArrayList<KhachHang> paging(int page, int limit) {
-        String sql = "select * from KhachHang order by maKhachHang"
+    public ArrayList<KhachHang> paging(int page, int limit, String sdt, String ten) {
+        String sql = "select * from KhachHang Where soDienThoai like ? and tenKhachHang like ? order by maKhachHang"
                 + " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
-            pstm.setInt(1, (page - 1) * limit);
-            pstm.setInt(2, limit);
+            pstm.setString(1, sdt + "%");
+            pstm.setString(2, ten + "%");
+            pstm.setInt(3, (page - 1) * limit);
+            pstm.setInt(4, limit);
             ResultSet rs = pstm.executeQuery();
             ArrayList<KhachHang> list = new ArrayList<>();
             while (rs.next()) {
                 KhachHang x = new KhachHang();
-                x.setMaKhachHang(rs.getString(1));
+                x.setMaKhachHang(rs.getInt(1));
                 x.setTenKhachHang(rs.getString(2));
                 x.setSoDienThoai(rs.getString(3));
                 x.setNgaySinh(rs.getString(4));
@@ -40,6 +42,7 @@ public class KhachHangService {
                 x.setEmail(rs.getString("email"));
                 x.setNgayTao(rs.getString("ngayTao"));
                 x.setGhiChu(rs.getString("ghiChu"));
+                x.setTrangThai(rs.getInt("trangThai")==1?true:false);
                 list.add(x);
             }
             return list;
@@ -50,8 +53,8 @@ public class KhachHangService {
     }
 
     public Integer insert(KhachHang x) {
-        String sql = "insert into KhachHang(tenKhachHang,soDienThoai,ngaySinh,diaChi,gioiTinh,email,ngayTao,ghiChu)\n"
-                + "values(?,?,?,?,?,?,?,?)";
+        String sql = "insert into KhachHang(tenKhachHang,soDienThoai,ngaySinh,diaChi,gioiTinh,email,ngayTao,ghiChu,trangThai)\n"
+                + "values(?,?,?,?,?,?,?,?,?)";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
             pstm.setString(1, x.getTenKhachHang());
             pstm.setString(2, x.getSoDienThoai());
@@ -61,6 +64,7 @@ public class KhachHangService {
             pstm.setString(6, x.getEmail());
             pstm.setString(7, x.getNgayTao());
             pstm.setString(8, x.getGhiChu());
+            pstm.setInt(9, x.isTrangThai()?1:0);
             int rs = pstm.executeUpdate();
             return rs;
         } catch (Exception e) {
@@ -72,10 +76,10 @@ public class KhachHangService {
 
     public Integer update(KhachHang x) {
         String sql = "update KhachHang set tenKhachHang=?,soDienThoai=?,"
-                + "ngaySinh=?,diaChi=?,gioiTinh=?,email=?,ngayTao=?,ghiChu=?\n"
+                + "ngaySinh=?,diaChi=?,gioiTinh=?,email=?,ngayTao=?,ghiChu=?,trangThai=?\n"
                 + " where maKhachHang=?";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
-            pstm.setString(9, x.getMaKhachHang());
+            pstm.setInt(10, x.getMaKhachHang());
             pstm.setString(1, x.getTenKhachHang());
             pstm.setString(2, x.getSoDienThoai());
             pstm.setString(3, x.getNgaySinh());
@@ -84,6 +88,7 @@ public class KhachHangService {
             pstm.setString(6, x.getEmail());
             pstm.setString(7, x.getNgayTao());
             pstm.setString(8, x.getGhiChu());
+            pstm.setInt(9, x.isTrangThai()?1:0);
             int rs = pstm.executeUpdate();
             return rs;
         } catch (Exception e) {
@@ -93,10 +98,10 @@ public class KhachHangService {
         return null;
     }
 
-    public Integer delete(String key) {
+    public Integer delete(int key) {
         String sql = "delete KhachHang where maKhachHang=?";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
-            pstm.setString(1, key);
+            pstm.setInt(1, key);
             Integer rs = pstm.executeUpdate();
             return rs;
         } catch (Exception e) {
@@ -104,31 +109,17 @@ public class KhachHangService {
         }
         return null;
     }
-
-    public ArrayList<KhachHang> searchBySDT(int page, int limit, String sdt) {
-        String sql = "select * from KhachHang Where soDienThoai like ? order by maKhachHang"
-                + " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
-
+    
+    public KhachHang checkKN(int ma){
+        String sql = "select * from HoaDon where maKhachHang = ?";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
-            pstm.setString(1, sdt + "%");
-            pstm.setInt(2, (page - 1) * limit);
-            pstm.setInt(3, limit);
-            ArrayList<KhachHang> list = new ArrayList<>();
+            pstm.setInt(1, ma);
             ResultSet rs = pstm.executeQuery();
+            KhachHang x = new KhachHang();
             while (rs.next()) {
-                KhachHang x = new KhachHang();
-                x.setMaKhachHang(rs.getString(1));
-                x.setTenKhachHang(rs.getString(2));
-                x.setSoDienThoai(rs.getString(3));
-                x.setNgaySinh(rs.getString(4));
-                x.setDiaChi(rs.getString(5));
-                x.setGioiTinh(rs.getInt(6) == 1 ? "nam" : "nữ");
-                x.setEmail(rs.getString("email"));
-                x.setNgayTao(rs.getString("ngayTao"));
-                x.setGhiChu(rs.getString("ghiChu"));
-                list.add(x);
+                x.setMaKhachHang(rs.getInt("maKhachHang"));
             }
-            return list;
+            return x;
         } catch (Exception e) {
             e.printStackTrace();
         }

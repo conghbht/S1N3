@@ -9,9 +9,11 @@ package models;
  * @author dovan
  */
 public class Imei {
+
     private int ma;
     private String soImei;
     private int maSanPhamChiTiet;
+    private boolean trangThai;
 
     public Imei() {
     }
@@ -44,6 +46,14 @@ public class Imei {
 
     public void setMaSanPhamChiTiet(int maSanPhamChiTiet) {
         this.maSanPhamChiTiet = maSanPhamChiTiet;
+    }
+
+    public boolean isTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
     }
     
     

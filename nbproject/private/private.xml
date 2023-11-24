@@ -6,15 +6,15 @@
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/services/BoNhoTrongService.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/services/NhanVienService.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/services/HeDieuHanhService.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/views/ImportFileExcel.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/models/ManHinh.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/models/Camera.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/models/HoaDon.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/services/CameraService.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/models/LoaiHang.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/views/SanPhamView.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/views/ThongKeView.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/utils/XDate.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/models/BoNhoTrong.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/models/HoaDonChiTiet.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/utils/DBContext.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/views/ThemSanPham.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/views/NhanVienView.java</file>
@@ -26,29 +26,28 @@
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/models/CPU.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/services/HangService.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/services/LoaiHangService.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/views/HoaDonView.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/services/ImeiService.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/views/DangXuatJDialog.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/utils/MsgBox.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/services/CPUService.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/views/DangXuatJDialog.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/models/Imei.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/models/Hang.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/models/NhanVien.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/services/SanPhamService.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/views/DoiMatKhauJDialog.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/views/ChaoJDialog1.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/models/NhanVien.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/views/BanHangView.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/services/XuatXuService.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/controller/ChuyenManHinhController.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/services/KhachHangService.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/utils/Auth.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/views/ThemGioHang.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/views/KhuyenMaiView.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/services/ManHinhService.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/views/KhachHangView.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/views/haha.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/views/QuetQr.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/models/SanPham.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/models/MauSac.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/models/SanPhamChiTiet.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/models/HeDieuHanh.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/views/FormQuanLiManHinh1.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/services/HoaDonService.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/views/main1.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/utils/fileChoose.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/models/KhachHang.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/QuanLiCuaHangDienThoai/src/views/DangNhapJDialog.java</file>
         </group>

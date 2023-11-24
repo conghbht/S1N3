@@ -17,6 +17,7 @@ import utils.DBContext;
  * @author dovan
  */
 public class RamService {
+
     public ArrayList<Ram> getAll() {
         String sql = "select * from Ram";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
@@ -27,6 +28,7 @@ public class RamService {
                 x.setMa(rs.getInt(1));
                 x.setTen(rs.getString(2));
                 x.setDungLuong(rs.getString(3));
+                x.setTrangThai(rs.getInt(4) == 1 ? true : false);
                 list.add(x);
             }
             return list;
@@ -35,7 +37,7 @@ public class RamService {
         }
         return null;
     }
-    
+
     public Ram searchByID(int id) {
         String sql = "select * from Ram where ma = ?";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
@@ -47,6 +49,7 @@ public class RamService {
                 x.setMa(rs.getInt(1));
                 x.setTen(rs.getString(2));
                 x.setDungLuong(rs.getString(3));
+                x.setTrangThai(rs.getInt(4) == 1 ? true : false);
                 list.add(x);
             }
             return list.get(0);

@@ -28,6 +28,7 @@ public class HangService {
                 Hang x = new Hang();
                 x.setMa(rs.getInt(1));
                 x.setTen(rs.getString(2));
+                x.setTrangThai(rs.getInt(3) == 1 ? true : false);
                 list.add(x);
             }
             return list;
@@ -47,6 +48,7 @@ public class HangService {
                 Hang x = new Hang();
                 x.setMa(rs.getInt(1));
                 x.setTen(rs.getString(2));
+                x.setTrangThai(rs.getInt(3) == 1 ? true : false);
                 list.add(x);
             }
             return list.get(0);
@@ -61,6 +63,7 @@ public class HangService {
                 + " values(?,?)";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
             pstm.setString(1, x.getTen());
+            pstm.setInt(2, x.isTrangThai()?1:0);
             Integer rs = pstm.executeUpdate();
             return rs;
         } catch (Exception e) {

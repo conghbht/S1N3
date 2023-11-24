@@ -11,6 +11,7 @@ package models;
 public class CPU {
     private int ma;
     private String loai;
+    private boolean trangThai;
 
     public int getMa() {
         return ma;
@@ -31,6 +32,14 @@ public class CPU {
     @Override
     public String toString() {
         return  loai;
+    }
+
+    public boolean isTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
     }
     
     

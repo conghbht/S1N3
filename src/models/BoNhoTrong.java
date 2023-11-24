@@ -12,7 +12,8 @@ public class BoNhoTrong {
     private int ma;
     private String loai;
     private String dungLuong;
-
+    private boolean trangThai;
+    
     public BoNhoTrong() {
     }
 
@@ -49,6 +50,14 @@ public class BoNhoTrong {
     @Override
     public String toString() {
         return loai + " - " + dungLuong;
+    }
+
+    public boolean isTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
     }
     
     

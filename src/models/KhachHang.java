@@ -9,7 +9,7 @@ package models;
  * @author dovan
  */
 public class KhachHang {
-    private String maKhachHang;
+    private int maKhachHang;
     private String tenKhachHang;
     private String soDienThoai;
     private String ngaySinh;
@@ -18,11 +18,13 @@ public class KhachHang {
     private String email;
     private String ngayTao;
     private String ghiChu;
+    private boolean trangThai;
+
 
     public KhachHang() {
     }
 
-    public KhachHang(String maKhachHang, String tenKhachHang, String soDienThoai, String ngaySinh, String diaChi, String gioiTinh, String email, String ngayTao, String ghiChu) {
+    public KhachHang(int maKhachHang, String tenKhachHang, String soDienThoai, String ngaySinh, String diaChi, String gioiTinh, String email, String ngayTao, String ghiChu) {
         this.maKhachHang = maKhachHang;
         this.tenKhachHang = tenKhachHang;
         this.soDienThoai = soDienThoai;
@@ -36,11 +38,11 @@ public class KhachHang {
 
     
 
-    public String getMaKhachHang() {
+    public int getMaKhachHang() {
         return maKhachHang;
     }
 
-    public void setMaKhachHang(String maKhachHang) {
+    public void setMaKhachHang(int maKhachHang) {
         this.maKhachHang = maKhachHang;
     }
 
@@ -106,6 +108,14 @@ public class KhachHang {
 
     public void setGhiChu(String ghiChu) {
         this.ghiChu = ghiChu;
+    }
+
+    public boolean isTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
     }
     
     

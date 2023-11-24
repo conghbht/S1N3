@@ -42,6 +42,7 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         else{
             Auth.user=nhanVien;
             this.dispose();
+            new main1().setVisible(true);
         }
     }
     void ketThuc(){

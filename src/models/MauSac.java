@@ -11,6 +11,7 @@ package models;
 public class MauSac {
     private int ma;
     private String ten;
+    private boolean trangThai;
 
     public MauSac() {
     }
@@ -40,6 +41,12 @@ public class MauSac {
     public String toString() {
         return  ten ;
     }
-    
-    
+
+    public boolean isTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
+    }
 }

@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import models.BoNhoTrong;
 import models.ManHinh;
 import models.MauSac;
 import utils.DBContext;
@@ -17,6 +18,7 @@ import utils.DBContext;
  * @author dovan
  */
 public class MauSacService {
+
     public ArrayList<MauSac> getAll() {
         String sql = "select * from MauSac";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
@@ -26,9 +28,30 @@ public class MauSacService {
                 MauSac x = new MauSac();
                 x.setMa(rs.getInt(1));
                 x.setTen(rs.getString(2));
+                x.setTrangThai(rs.getInt(3) == 1 ? true : false);
                 list.add(x);
             }
             return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public MauSac searchByID(int id) {
+        String sql = "select * from MauSac where ma = ?";
+        try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
+            pstm.setInt(1, id);
+            ResultSet rs = pstm.executeQuery();
+            ArrayList<MauSac> list = new ArrayList<>();
+            while (rs.next()) {
+                MauSac x = new MauSac();
+                x.setMa(rs.getInt(1));
+                x.setTen(rs.getString(2));
+                x.setTrangThai(rs.getInt(3) == 1 ? true : false);
+                list.add(x);
+            }
+            return list.get(0);
         } catch (Exception e) {
             e.printStackTrace();
         }
