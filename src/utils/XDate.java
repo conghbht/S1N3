@@ -14,11 +14,10 @@ import java.util.Date;
  */
 public class XDate {
     static SimpleDateFormat formater = new SimpleDateFormat();
-    // chuyển đổi string sang date
-    //date là string cần chuyển
-    //pattern là định dạng thời gian
-    //return date kết quả
     public static Date toDate(String date,String pattern){
+        if (pattern.isEmpty()) {
+            pattern="dd-MM-yyyy";
+        }
         try {
             formater.applyPattern(pattern);
             return formater.parse(date);
@@ -32,6 +31,9 @@ public class XDate {
     //return date kết quả
 
     public static String toString(Date date,String pattern){
+        if (pattern.isEmpty()) {
+            pattern="dd-MM-yyyy";
+        }
         formater.applyPattern(pattern);
         return formater.format(date);
     }
@@ -45,5 +47,21 @@ public class XDate {
     public static Date addDays(Date date,Long days){
         date.setTime(date.getTime()+days*24*60*60*1000);
         return date;
+    }
+    public static boolean checkDataDay (Date date) {
+        Date ngayBatDau = new Date(2022 - 1900, 0, 1);
+        if (date.after(XDate.now()) || ngayBatDau.after(date)) {
+            DialogHelper.alert(null, "Thời gian vượt ngoài khoảng thời gian hoạt động");
+            return false;
+        }
+        return true;
+    }
+    
+    public static boolean checkDataYear (int year) {
+        if (year > XDate.now().getYear() || year < 2022) {
+            DialogHelper.alert(null, "Thời gian vượt ngoài khoảng thời gian hoạt động");
+            return false;
+        }
+        return true;
     }
 }

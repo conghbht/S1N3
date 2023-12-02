@@ -19,8 +19,8 @@ public class SanPhamChiTiet {
     private int maCPU;
     private int maXuatXu;
     private int maLoaiHang;
-    private double giaNhap;
-    private double giaBan;
+    private float giaNhap;
+    private float giaBan;
     private String ngayTao;
     private boolean trangThai;
     private int maimei;
@@ -28,7 +28,7 @@ public class SanPhamChiTiet {
     public SanPhamChiTiet() {
     }
 
-    public SanPhamChiTiet(int maSPCT, String maSP, int maMauSac, int maManHinh, int maBoNhoTrong, int maCamera, int maRam, int maCPU, int maXuatXu, int maLoaiHang, double giaNhap, double giaBan, String ngayTao, boolean trangThai, int maimei) {
+    public SanPhamChiTiet(int maSPCT, String maSP, int maMauSac, int maManHinh, int maBoNhoTrong, int maCamera, int maRam, int maCPU, int maXuatXu, int maLoaiHang, float giaNhap, float giaBan, String ngayTao, boolean trangThai, int maimei) {
         this.maSPCT = maSPCT;
         this.maSP = maSP;
         this.maMauSac = maMauSac;
@@ -126,19 +126,19 @@ public class SanPhamChiTiet {
         this.maLoaiHang = maLoaiHang;
     }
 
-    public double getGiaNhap() {
+    public float getGiaNhap() {
         return giaNhap;
     }
 
-    public void setGiaNhap(double giaNhap) {
+    public void setGiaNhap(float giaNhap) {
         this.giaNhap = giaNhap;
     }
 
-    public double getGiaBan() {
+    public float getGiaBan() {
         return giaBan;
     }
 
-    public void setGiaBan(double giaBan) {
+    public void setGiaBan(float giaBan) {
         this.giaBan = giaBan;
     }
 

@@ -1,7 +1,7 @@
-﻿create database DuAnXuong
+﻿create database DuAnXuong1
 go
 
-use DuAnXuong
+use DuAnXuong1
 go
 
 create table HeDieuHanh(
@@ -231,6 +231,31 @@ create table HoaDonChiTiet(
 )
 go
 
+create table KhuyenMai
+(
+    maKhuyenMai varchar(15) not null,
+    tenChuongTrinh nvarchar(50) not null,
+    ngayBatDau date not null,
+    ngayKetThuc date not null,
+    moTa nvarchar(255) not null,
+    trangThai bit ,
+	donViGiam varchar(15) not null,
+	giaTriGiam int not null,
+    primary key(maKhuyenMai)
+)
+go
+create table KhuyenMaiSanPham
+(
+    maKhuyenMaiSanPham int identity(1,1) not null,
+    maKhuyenMai varchar(15) not null,
+    maSanPhamChiTiet int null,
+	trangThai bit,
+    primary key(maKhuyenMaiSanPham),
+    foreign key (maSanPhamChiTiet) references SanPhamChiTiet(maSanPhamChiTiet),
+    foreign key (maKhuyenMai) references KhuyenMai(maKhuyenMai)
+)
+go
+
 
 insert into HeDieuHanh(ten,trangThai)
     values('IOS',1),
@@ -331,7 +356,7 @@ insert into SanPhamChiTiet  (maSanPham,maMauSac,maManHinh,maBoNhoTrong,maCamera,
     ('IPC','2','2','6','1','5','1','2','2',6000000,4500000,'10/4/2023',1),
     ('SSA','1','2','6','1','5','2','1','1',4000000,3500000,'10/4/2023',1)
 go
-
+select * from KhachHang
     insert into Imei(soImei,maSanPhamChiTiet,trangThai)
         values('879456','1',1),
     ('264654','1',1),
@@ -369,9 +394,18 @@ inner join SanPhamChiTiet on SanPham.maSanPham = SanPhamChiTiet.maSanPham
 inner join Imei on SanPhamChiTiet.maSanPhamChiTiet = Imei.maSanPhamChiTiet
 group by SanPhamChiTiet.maSanPhamChiTiet,SanPham.tenSanPham
 
-select * from SanPhamChiTiet order by maSanPhamChiTiet desc
+ order by maSanPhamChiTiet desc
 select * from HoaDon
 select * from HoaDonChiTiet
-
+select * from Imei
+select * from SanPhamChiTiet
+select tenSanPham,maCamera,maRam,maHDH,soImei,Imei.maSanPhamChiTiet,Imei.trangThai from SanPham
+inner join SanPhamChiTiet on SanPham.maSanPham = SanPhamChiTiet.maSanPham
+inner join Imei on Imei.maSanPhamChiTiet = SanPhamChiTiet.maSanPhamChiTiet
+where Imei.trangThai=1
 select * from KhachHang
 update SanPhamChiTiet set trangThai=0 where maSanPhamChiTiet = 1
+
+select * from KhuyenMai
+select * from KhuyenMaiSanPham
+delete KhuyenMaiSanPham where maKhuyenMai = 'KM01'

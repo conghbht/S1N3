@@ -8,12 +8,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.crypto.interfaces.DHKey;
 import models.HoaDon;
 import models.HoaDonChiTiet;
+import models.HoaDonModel;
+import models.KhachHang;
+import models.NhanVien;
 import models.SanPham;
 import utils.Auth;
 import utils.DBContext;
+import utils.XDate;
 
 /**
  *
@@ -40,7 +45,7 @@ public class HoaDonService {
                 x.setTienHang(rs.getFloat("tienHang"));
                 x.setTienShip(rs.getFloat("phiShip"));
                 x.setTongTien(rs.getFloat("tongTien"));
-                x.setTrangThai(rs.getInt("trangThai")==1?true:false);
+                x.setTrangThai(rs.getInt("trangThai") == 1 ? true : false);
                 x.setLoaiDH(rs.getInt("loaiDonHang"));
                 list.add(x);
             }
@@ -56,7 +61,7 @@ public class HoaDonService {
                 + "(?,?,?,getDate())";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
             pstm.setString(1, Auth.user.getMaNhanVien());
-            pstm.setInt(2, x.getTrangThai()?1:0);
+            pstm.setInt(2, x.getTrangThai() ? 1 : 0);
             pstm.setInt(3, x.getLoaiDH());
             Integer rs = pstm.executeUpdate();
             return rs;
@@ -108,7 +113,8 @@ public class HoaDonService {
                 x.setMaHD(rs.getInt("maHoaDon"));
                 x.setMaImei(rs.getInt("maImei"));
                 x.setSoLuong(rs.getInt("soLuong"));
-                x.setTongGia(rs.getFloat("tongGia"));
+                x.setDonGia(rs.getFloat("donGia"));
+                x.setTongGia(rs.getFloat("TongGia"));
                 list.add(x);
             }
             return list;
@@ -122,11 +128,11 @@ public class HoaDonService {
         String sql = "update HoaDon set maKhachHang=?,trangThai=?,loaiDonHang=?,phiShip=?,tienHang=?,tongTien=?,soDienThoai=? where maHoaDon =?";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
             pstm.setObject(1, hd.getMaKhachHang() == 0 ? null : hd.getMaKhachHang());
-            pstm.setInt(2, hd.getTrangThai()?1:0);
+            pstm.setInt(2, hd.getTrangThai() ? 1 : 0);
             pstm.setInt(3, hd.getLoaiDH());
             pstm.setFloat(4, hd.getTienShip());
             pstm.setFloat(5, tongTienDH(hd.getMaHoaDon()));
-            pstm.setFloat(6, hd.getTongTien()==0?tongTienDH(hd.getMaHoaDon())+hd.getTienShip():hd.getTongTien());
+            pstm.setFloat(6, tongTienDH(hd.getMaHoaDon()) + hd.getTienShip());
             pstm.setString(7, hd.getSoDienThoai());
             pstm.setInt(8, hd.getMaHoaDon());
             Integer rs = pstm.executeUpdate();
@@ -150,4 +156,70 @@ public class HoaDonService {
         }
         return 0;
     }
+
+    public ArrayList<HoaDon> getAllHD(int page, int limit) {
+        String sql = "select * from HoaDon where trangThai like ? and (loaiDonHang like ? or loaiDonHang=? or loaiDonHang=?) order by maHoaDon "
+                + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+        try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
+            pstm.setInt(1, 1);
+            pstm.setInt(2, 2);
+            pstm.setInt(3, 3);
+            pstm.setInt(4, 4);
+            pstm.setInt(5, (page - 1) * limit);
+            pstm.setInt(6, limit);
+            ResultSet rs = pstm.executeQuery();
+            ArrayList<HoaDon> list = new ArrayList<>();
+            while (rs.next()) {
+                HoaDon x = new HoaDon();
+                x.setMaHoaDon(rs.getInt("maHoaDon"));
+                x.setMaKhachHang(rs.getInt("maKhachHang"));
+                x.setMaNhanVien(rs.getString("maNhanVien"));
+                x.setTenNguoiNhan(rs.getString("tenNguoiNhan"));
+                x.setDiaChi(rs.getString("diaChi"));
+                x.setSoDienThoai(rs.getString("soDienThoai"));
+                x.setTienHang(rs.getFloat("tienHang"));
+                x.setTienShip(rs.getFloat("phiShip"));
+                x.setTongTien(rs.getFloat("tongTien"));
+                x.setTrangThai(rs.getInt("trangThai") == 1 ? true : false);
+                x.setLoaiDH(rs.getInt("loaiDonHang"));
+                x.setNgayTao(rs.getString("ngayTao"));
+                list.add(x);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ArrayList<HoaDon> getByDate(String d1, String d2) {
+        String sql = "select * from HoaDon where ngayTao between ? and ? ";
+        try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
+            pstm.setObject(1, d1);
+            pstm.setObject(2, d2);
+            ResultSet rs = pstm.executeQuery();
+            ArrayList<HoaDon> list = new ArrayList<>();
+            while (rs.next()) {
+                HoaDon x = new HoaDon();
+                x.setMaHoaDon(rs.getInt("maHoaDon"));
+                x.setMaKhachHang(rs.getInt("maKhachHang"));
+                x.setMaNhanVien(rs.getString("maNhanVien"));
+                x.setTenNguoiNhan(rs.getString("tenNguoiNhan"));
+                x.setDiaChi(rs.getString("diaChi"));
+                x.setSoDienThoai(rs.getString("soDienThoai"));
+                x.setTienHang(rs.getFloat("tienHang"));
+                x.setTienShip(rs.getFloat("phiShip"));
+                x.setTongTien(rs.getFloat("tongTien"));
+                x.setTrangThai(rs.getInt("trangThai") == 1 ? true : false);
+                x.setLoaiDH(rs.getInt("loaiDonHang"));
+                x.setNgayTao(rs.getString("ngayTao"));
+                list.add(x);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

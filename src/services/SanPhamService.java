@@ -29,7 +29,7 @@ public class SanPhamService {
                 + "where tenSanPham like ? and SanPhamChiTiet.trangThai like ? order by SanPham.maSanPham "
                 + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY ";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
-            pstm.setString(1, ten + "%");
+            pstm.setString(1,"%"+ ten + "%");
             pstm.setString(2, trangThai + "%");
             pstm.setInt(3, (page - 1) * limit);
             pstm.setInt(4, limit);
@@ -47,10 +47,10 @@ public class SanPhamService {
                 x.setMaCPU(rs.getInt("maCPU"));
                 x.setMaXuatXu(rs.getInt("maXuatXu"));
                 x.setMaLoaiHang(rs.getInt("maLoaiHang"));
-                x.setGiaNhap(rs.getDouble("giaNhap"));
-                x.setGiaBan(rs.getDouble("giaSanPham"));
+                x.setGiaNhap(rs.getFloat("giaNhap"));
+                x.setGiaBan(rs.getFloat("giaSanPham"));
                 x.setNgayTao(rs.getString("ngayTao"));
-                x.setTrangThai(rs.getInt("trangThai")==1?true:false);
+                x.setTrangThai(rs.getInt("trangThai") == 1 ? true : false);
                 list.add(x);
             }
             return list;
@@ -119,11 +119,11 @@ public class SanPhamService {
             pstm.setInt(6, spct.getMaCPU());
             pstm.setInt(7, spct.getMaXuatXu());
             pstm.setInt(8, spct.getMaLoaiHang());
-            pstm.setDouble(9, spct.getGiaBan());
-            pstm.setDouble(10, spct.getGiaNhap());
+            pstm.setFloat(9, spct.getGiaBan());
+            pstm.setFloat(10, spct.getGiaNhap());
             pstm.setString(11, spct.getNgayTao());
-            pstm.setInt(12, spct.isTrangThai()?1:0);
-            System.out.println(spct.isTrangThai()?1:0);
+            pstm.setInt(12, spct.isTrangThai() ? 1 : 0);
+            System.out.println(spct.isTrangThai() ? 1 : 0);
             pstm.setInt(13, spct.getMaSPCT());
             Integer rs = pstm.executeUpdate();
             return rs;
@@ -159,7 +159,7 @@ public class SanPhamService {
         }
         return null;
     }
-    
+
     public Integer searchNewSPCT() {
         String sql = "select * from SanPhamChiTiet order by maSanPhamChiTiet desc";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
@@ -174,6 +174,8 @@ public class SanPhamService {
         return null;
     }
     
+    
+
     public SanPhamChiTiet searchBymaSPCT(int ma) {
         String sql = "select * from SanPhamChiTiet where maSanPhamChiTiet = ?";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
@@ -192,10 +194,40 @@ public class SanPhamService {
                 x.setMaCPU(rs.getInt("maCPU"));
                 x.setMaXuatXu(rs.getInt("maXuatXu"));
                 x.setMaLoaiHang(rs.getInt("maLoaiHang"));
-                x.setGiaNhap(rs.getDouble("giaNhap"));
-                x.setGiaBan(rs.getDouble("giaSanPham"));
+                x.setGiaNhap(rs.getFloat("giaNhap"));
+                x.setGiaBan(rs.getFloat("giaSanPham"));
                 x.setNgayTao(rs.getString("ngayTao"));
-                x.setTrangThai(rs.getInt("trangThai")==1?true:false);
+                x.setTrangThai(rs.getInt("trangThai") == 1 ? true : false);
+                return x;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public SanPhamChiTiet searchBySoImei(String soImei) {
+        String sql = "select * from SanPhamChiTiet where maSanPhamChiTiet in (select maSanPhamChiTiet from Imei where soImei = ?)";
+        try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
+            pstm.setString(1, soImei);
+            ArrayList<SanPham> list = new ArrayList<>();
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                SanPhamChiTiet x = new SanPhamChiTiet();
+                x.setMaSPCT(rs.getInt("maSanPhamChiTiet"));
+                x.setMaSP(rs.getString("maSanPham"));
+                x.setMaMauSac(rs.getInt("maMauSac"));
+                x.setMaManHinh(rs.getInt("maManHinh"));
+                x.setMaBoNhoTrong(rs.getInt("maBoNhoTrong"));
+                x.setMaCamera(rs.getInt("maCamera"));
+                x.setMaRam(rs.getInt("maRam"));
+                x.setMaCPU(rs.getInt("maCPU"));
+                x.setMaXuatXu(rs.getInt("maXuatXu"));
+                x.setMaLoaiHang(rs.getInt("maLoaiHang"));
+                x.setGiaNhap(rs.getFloat("giaNhap"));
+                x.setGiaBan(rs.getFloat("giaSanPham"));
+                x.setNgayTao(rs.getString("ngayTao"));
+                x.setTrangThai(rs.getInt("trangThai") == 1 ? true : false);
                 return x;
             }
         } catch (Exception e) {
@@ -242,4 +274,41 @@ public class SanPhamService {
         return null;
     }
 
+    public ArrayList<SanPhamChiTiet> searchSPCTByKM(int page, int limit, String ten, String trangThai) {
+        String sql = "select * from SanPhamChiTiet "
+                + "inner join SanPham on SanPham.maSanPham = SanPhamChiTiet.maSanPham "
+                + "where SanPham.tenSanPham like ? and SanPhamChiTiet.trangThai like ?"
+                + " and maSanPhamChiTiet not in (select maSanPhamChiTiet from KhuyenMaiSanPham) order by SanPhamChiTiet.maSanPhamChiTiet "
+                + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY ";
+        try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
+            pstm.setString(1, ten + "%");
+            pstm.setString(2, trangThai + "%");
+            pstm.setInt(3, (page - 1) * limit);
+            pstm.setInt(4, limit);
+            ResultSet rs = pstm.executeQuery();
+            ArrayList<SanPhamChiTiet> list = new ArrayList<>();
+            while (rs.next()) {
+                SanPhamChiTiet x = new SanPhamChiTiet();
+                x.setMaSPCT(rs.getInt("maSanPhamChiTiet"));
+                x.setMaSP(rs.getString("maSanPham"));
+                x.setMaMauSac(rs.getInt("maMauSac"));
+                x.setMaManHinh(rs.getInt("maManHinh"));
+                x.setMaBoNhoTrong(rs.getInt("maBoNhoTrong"));
+                x.setMaCamera(rs.getInt("maCamera"));
+                x.setMaRam(rs.getInt("maRam"));
+                x.setMaCPU(rs.getInt("maCPU"));
+                x.setMaXuatXu(rs.getInt("maXuatXu"));
+                x.setMaLoaiHang(rs.getInt("maLoaiHang"));
+                x.setGiaNhap(rs.getFloat("giaNhap"));
+                x.setGiaBan(rs.getFloat("giaSanPham"));
+                x.setNgayTao(rs.getString("ngayTao"));
+                x.setTrangThai(rs.getInt("trangThai") == 1 ? true : false);
+                list.add(x);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

@@ -72,21 +72,21 @@ public class ImportExcell {
 
             while (rowIterator.hasNext()) {
                 Row row = rowIterator.next();
-                SanPhamChiTiet x = new SanPhamChiTiet();
-                x.setMaSanPham(getStringCellValue(row.getCell(0)));
-                x.setMaDonViTinh(getma(getStringCellValue(row.getCell(7))));
-                long exceldate = Long.valueOf(getStringCellValue(row.getCell(9)));
-                x.setHanSuDung(XDate.toString(convertExcelDateToJavaDate(exceldate), "dd-MM-yyyy"));
-                x.setSoLuong((int) row.getCell(10).getNumericCellValue());
-                x.setGiaNhap((float) row.getCell(11).getNumericCellValue());
-                x.setDonGia((float) row.getCell(12).getNumericCellValue());
-                x.setKhoiLuong((float) row.getCell(13).getNumericCellValue());
-                x.setDonViTinhKhoiLuong(getStringCellValue(row.getCell(14)));
-                exceldate = Long.valueOf(getStringCellValue(row.getCell(15)));
-                x.setNgaySanXuat(XDate.toString(convertExcelDateToJavaDate(exceldate), "dd-MM-yyyy"));
-                x.setBarcode(getStringCellValue(row.getCell(16)));
-                x.setTrangThai((int) row.getCell(17).getNumericCellValue() == 1 ? true : false);
-                x.setAnhSanPham(getStringCellValue(row.getCell(8)));
+                 SanPhamChiTiet x = new SanPhamChiTiet();
+                x.setMaSPCT(rs.getInt("maSanPhamChiTiet"));
+                x.setMaSP(rs.getString("maSanPham"));
+                x.setMaMauSac(rs.getInt("maMauSac"));
+                x.setMaManHinh(rs.getInt("maManHinh"));
+                x.setMaBoNhoTrong(rs.getInt("maBoNhoTrong"));
+                x.setMaCamera(rs.getInt("maCamera"));
+                x.setMaRam(rs.getInt("maRam"));
+                x.setMaCPU(rs.getInt("maCPU"));
+                x.setMaXuatXu(rs.getInt("maXuatXu"));
+                x.setMaLoaiHang(rs.getInt("maLoaiHang"));
+                x.setGiaNhap(rs.getDouble("giaNhap"));
+                x.setGiaBan(rs.getDouble("giaSanPham"));
+                x.setNgayTao(rs.getString("ngayTao"));
+                x.setTrangThai(rs.getInt("trangThai")==1?true:false);
                 data.add(x);
             }
         } catch (IOException e) {

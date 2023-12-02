@@ -13,14 +13,15 @@ public class HoaDonChiTiet {
     private int maHDCT;
     private int maHD;
     private int maImei;
-    private double donGia;
+    private float donGia;
     private int soLuong;
     private float tongGia;
+    private int trangThai;
 
     public HoaDonChiTiet() {
     }
 
-    public HoaDonChiTiet(int maHDCT, int maHD, int maImei, double donGia, int soLuong, float tongGia) {
+    public HoaDonChiTiet(int maHDCT, int maHD, int maImei, float donGia, int soLuong, float tongGia) {
         this.maHDCT = maHDCT;
         this.maHD = maHD;
         this.maImei = maImei;
@@ -53,7 +54,7 @@ public class HoaDonChiTiet {
         this.maImei = maImei;
     }
 
-    public double getDonGia() {
+    public float getDonGia() {
         return donGia;
     }
 
@@ -77,4 +78,13 @@ public class HoaDonChiTiet {
         this.tongGia = tongGia;
     }
 
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    
 }

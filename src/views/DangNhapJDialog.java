@@ -4,7 +4,6 @@
  */
 package views;
 
-
 import models.NhanVien;
 import javax.swing.JOptionPane;
 import services.NhanVienService;
@@ -18,38 +17,44 @@ import utils.MsgBox;
 public class DangNhapJDialog extends javax.swing.JDialog {
 
     NhanVienService service = new NhanVienService();
-    void init(){
+
+    void init() {
 //        setIconImage(XImage.getAppIcon());
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setTitle("Quản Lí Bán Hàng - Đăng Nhập");
     }
+
     public DangNhapJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         init();
+        txtma.setText("NV001");
+        txtmatkhau.setText("123456");
+
     }
-    void dangNhap(){
+
+    void dangNhap() {
         String manv = txtma.getText();
         String matkhau = new String(txtmatkhau.getPassword());
         NhanVien nhanVien = service.searchByid(manv);
-        if(nhanVien == null){
+        if (nhanVien == null) {
             JOptionPane.showMessageDialog(this, "sai tên đăng nhập");
-        }
-        else if (!matkhau.equals(nhanVien.getMatKhau())){
+        } else if (!matkhau.equals(nhanVien.getMatKhau())) {
             JOptionPane.showMessageDialog(this, "Sai mật khẩu!");
-        }
-        else{
-            Auth.user=nhanVien;
+        } else {
+            Auth.user = nhanVien;
             this.dispose();
             new main1().setVisible(true);
         }
     }
-    void ketThuc(){
-        if(MsgBox.confirm(this, "Bạn muốn kết thúc ứng dụng ?")){
+
+    void ketThuc() {
+        if (MsgBox.confirm(this, "Bạn muốn kết thúc ứng dụng ?")) {
             System.exit(0);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
